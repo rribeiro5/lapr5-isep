@@ -1,0 +1,291 @@
+
+.FormContainer{
+    width: 100%;
+    padding: 0 4.5rem;
+}
+
+.RegisterFormContainer,.modal{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    overflow-y: visible;
+}
+
+.profile-info ,.profile-info .RegisterFormContainer,.profi{
+    width: 100%;
+}
+
+/** Styling do select + textArea + cena das tags */ 
+.RegisterFormContainerinput > select, .RegisterFormContainerinput> textarea,.react-tagsinput{
+    color: var(--dark);
+    background-color: var(--text-color);
+}
+/** Styling do select + textArea + cena das tags */
+.RegisterFormContainerinput>textarea:focus, .RegisterFormContainerinput>input:focus{
+    color: var(--main-background-color);
+    background-color: var(--text-color);
+}
+
+
+.PasswordForm,.react-tagsinput{
+    padding: 0;
+    margin: 0;
+}
+
+.inputForm,.react-tagsinput,.form-group,.MuiFormLabel-root,.input-password__field,.MuiFormControl-root {
+    width: 100%;
+    word-break: break-word;
+}
+
+.inputForm{
+    margin: 0.8rem 0;
+    border-radius: 3px;
+    
+}
+
+/*
+.inputForm input:hover, .inputForm input:active ,.react-tagsinput:hover , .react-tagsinput:active ,.react-tagsinput--focused
+.inputForm select:hover, .inputForm select:active,
+.inputForm textarea:hover, .inputForm textarea:active
+{
+    border: 1px solid var(--main-theme-color);
+}
+*/
+
+
+
+.react-tagsinput-tag{
+    color:var(--dark);
+    border: 1px solid var(--main-theme-color);
+}
+
+
+.inputForm input,.inputForm select,.inputForm textarea,.react-tagsinput{
+    width: 100%;
+    border-radius: 3px;
+    padding:0.5em 1.2em;
+    font-size: 0.9rem;
+    background-color: var(--white);
+    color: var(--dark);
+    font-weight: lighter;
+    border:0
+}
+
+.react-tagsinput{
+    width: 60%;
+    border: 1px solid var(--dark);
+    margin: 1.5rem 0;
+    
+}
+
+
+.react-tagsinput span{
+    background-color: var(--white);
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    padding: 2px;
+}
+
+.react-tagsinput-input{
+    text-decoration: underline;
+    color: var(--dark);
+}
+.react-tagsinput-remove{
+    margin-left: 5px;
+    font-size: 28px;
+    color: var(--dark);
+}
+
+
+
+.inputForm textarea{
+    resize: none;
+    margin: auto 0;
+}
+
+
+.inputForm input::placeholder,.inputForm textarea::placeholder, .inputF{
+    color: var(--default-border-color);
+    font-weight: bold;
+}
+
+
+
+
+.profileInformation,.RegisterFormContainer  input[type=submit],.RegisterFormContainer button{
+    border-radius: 999px;
+    padding: 0.5em 1.2em;
+    margin: 1.2rem 0;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: var(--main-theme-color) 0 3px 8px ;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 60%;
+    word-break: break-word;
+    border:0;
+    background-color:var(--main-theme-color);
+    color: #fff;
+    transition: 1s opacity;
+}
+
+.profileInformation:hover,.profileInformation:active,.profileInformation:focus,.RegisterFormContainer input[type=submit]:focus,.RegisterFormContainer  input[type=submit]:hover,.RegisterFormContainer  input[type=submit]:active{
+    
+    opacity: 0.7;
+}
+
+.RegisterFormContainer .form__group , .modal .form__group {
+    position: relative;
+    padding: 0.5rem 0 0;
+    margin-top: 1rem;
+    width: 60%;
+}
+
+.RegisterFormContainer .rgpd-field{
+    padding: 1.5rem 0;
+}
+
+.RegisterFormContainer .rgpd-field .form__label {
+    width: 100%;
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+.RegisterFormContainer .rgpd-trigger{
+    line-height: normal;
+    display: inline;
+    border-radius: 0;
+    box-shadow: var(--main-background-color);
+    padding: 0;
+    margin:0;
+    font-size: 1rem;
+    opacity: 1;
+    width: auto;
+    border:0;
+    background-color:transparent;
+    text-decoration: underline;
+}
+
+
+
+.MuiOutlinedInput-root {
+    border: 1px solid var(--white);
+}
+
+.RegisterFormContainer .form__field , .modal .form__field{
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid var(--white);
+    outline: 0;
+    font-size: 1rem;
+    font-weight: lighter;
+    color: var(--white);
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin: 0.4rem 0;
+}
+
+.RegisterFormContainer .form__field option , .modal .form__field option{
+    background-color: var(--main-background-color);
+}
+
+
+.RegisterFormContainer .form__field::placeholder , .modal .form__field::placeholder {
+    color: transparent;
+}
+
+
+.RegisterFormContainer .form__field:placeholder-shown ~ .form__label , .modal .form__field:placeholder-shown ~ .form__label{
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+
+.RegisterFormContainer .form__label, .modal .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+
+.RegisterFormContainer .form__field:focus ~ .form__label,.modal .form__field:focus ~ .form__label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--bright-pink);
+    font-weight:700;
+}
+
+
+.RegisterFormContainer .form__field:focus,.modal .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right,var(--bright-pink),var(--main-theme-color));
+    border-image-slice: 1;
+}
+
+
+.RegisterFormContainer .form__field:required,.form__field:invalid,.modal .form__field:required, .modal .form__field:invalid {
+    box-shadow:none;
+}
+
+.input-password input,.MuiSvgIcon-root path{
+    color:var(--white);
+}
+
+.RGPD-main-container{
+    padding:1.0rem;
+    text-align:justify;
+}
+
+.RGPD-main-container h2{
+    color: #9a95ff;
+}
+
+.RGPD-main-container h3{
+    color: #9a95ff;
+}
+
+.RGPD-main-container .ordered-lst .ordered-li {
+    display: list-item;
+    list-style-type: decimal !important;
+    list-style-position: inside;
+
+
+}
+
+.RGPD-main-container .ordered-lst ul li {
+    display: list-item;
+    list-style-type: circle !important;
+    list-style-position: inside;
+
+}
+
+.RGPD-main-container ul li {
+    display: list-item;
+    list-style-type: disc !important;
+    list-style-position: inside;
+
+}

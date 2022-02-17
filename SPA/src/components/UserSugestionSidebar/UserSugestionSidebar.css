@@ -1,0 +1,32 @@
+﻿.sugestion{
+    display: flex;
+    justify-content: space-around;
+    margin: 0.5rem 0;
+    align-items: center;
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sugestion button{
+    border-radius: 999px;
+    padding: 0.3rem 0.7em;
+    text-decoration: none;
+    font-weight: lighter;
+    cursor: pointer;
+    font-size: 0.9rem;
+    
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    
+    word-break: break-word;
+    background-color:var(--main-background-color);
+    color: var(--white);
+    transition: opacity 1s;
+    border: 1px solid var(--white) ;
+}

@@ -1,0 +1,47 @@
+.comment-main-container{
+    width: 100%;
+}
+
+.comment-form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment-form-input-text{
+    resize:none;
+    padding: 0.4rem;
+    margin-right: 5px;
+    border:0;
+    border-bottom: 1px solid var(--gray);
+    border-radius: 2px;
+    background: none;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    flex-grow: 1;
+    outline: none;
+}
+
+.comment-submit {
+    padding: 0.3rem;
+    margin-left: 5px;
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    font-weight: 700;
+    color: var(--main-theme-color);
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.comment-submit:hover {
+    opacity: 0.6;
+}
+
+.comment-main-container .react-tagsinput{
+    width: 100%;
+    border-radius:15px ;
+}

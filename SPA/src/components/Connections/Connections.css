@@ -1,0 +1,81 @@
+.connContainer {
+    width: 100%;
+    text-align: left;
+}
+
+.connection {
+    padding: 1.5rem 2.5rem;
+    width: 100%;
+    border-bottom: 1px solid var(--default-border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.connInfo {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    max-width: 60%;
+}
+
+.connInfo .info {
+    max-width: 80%;
+}
+
+.sb-avatar{
+    border: 1px solid var(--secondary-background-color);
+}
+
+.sb-avatar img{
+    padding: 5px;
+}
+
+.connInfo .Preview{
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.connection h3 {
+    margin-bottom: 0.3rem;
+    font-size: 13pt;
+}
+
+.connection p {
+    font-size: 0.8rem;
+    font-weight: 100;
+}
+
+.connAction{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 40%;
+}
+
+.connAction button {
+    border-radius: 999px;
+    padding: 0.5em 1.0em;
+    margin: 0.3rem 0;
+    text-decoration: none;
+    font-weight: 200;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 70%;
+    word-break: break-word;
+    color: #fff;
+    background-color:var(--main-background-color);
+    border: 1px solid var(--white);
+    transition: box-shadow 0.5s;
+}
+
+.connAction button:hover, .connAction button:active {
+    box-shadow: var(--white) 0 3px 9px;
+}

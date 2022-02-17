@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "8ed0358d-1eb6-413c-ab33-e055f809f9f8",
+		"name": "Teste Integracao - UC 7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clean Database",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Matches birthDayDate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.birthDayDate).to.eql(\"2000/1/1\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Matches Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"3@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"userId3\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"3@gmail.com\",\r\n    \"name\":\"Teste3\",\r\n    \"avatar\":\"http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd3\",\r\n    \"description\":\"c3\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Matches birthDayDate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.birthDayDate).to.eql(\"2000/1/1\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Matches Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"4@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"userId4\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"4@gmail.com\",\r\n    \"name\":\"Teste4\",\r\n    \"avatar\":\"http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd4\",\r\n    \"description\":\"c4\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido de ligacao direta por User 3 a User 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"let u3 = pm.globals.get(\"userId3\");\r",
+							"let u4 = pm.globals.get(\"userId4\");\r",
+							"\r",
+							"pm.test(\"Check Origin User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.origUser.value).to.eql(u3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Destinitary User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.destUser.value).to.eql(u4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check direct message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.messageOrigToDest).to.eql(\"Teste\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"request2Id\",response.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\": \"{{userId3}}\",\r\n    \"DestUser\": \"{{userId4}}\",\r\n    \"MessageOrigToDest\": \"Teste\",\r\n    \"ConnStrengthReq\": 4,\r\n    \"ConnTagsReq\": [\r\n        \"Bemfica\",\r\n        \"Xadrez\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/directConnection",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"directConnection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aceitar Pedido de ligacao direta por User 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let u3 = pm.globals.get(\"userId3\");\r",
+							"let u4 = pm.globals.get(\"userId4\");\r",
+							"\r",
+							"pm.test(\"Check user3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user1).to.eql(u3);\r",
+							"});\r",
+							"pm.test(\"Check user4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user2).to.eql(u4);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Answer\":true,\r\n    \"ConnectionStrength\":5,\r\n    \"Tags\":[\"Futebol\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/acceptance/{{request2Id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"acceptance",
+						"{{request2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter network para nivel 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let u3 = pm.globals.get(\"userId3\");\r",
+							"let u4 = pm.globals.get(\"userId4\");\r",
+							"\r",
+							"pm.test(\"Check root user\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(u3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check connections size for level 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.connections.length).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check user on connection for level 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.connections[0].user.id).to.eql(u4);\r",
+							"});\r",
+							"\r",
+							"pm.globals.clear()"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/network/{{userId3}}/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"network",
+						"{{userId3}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teardown",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

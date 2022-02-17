@@ -1,0 +1,16 @@
+﻿.reaction-main-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+.reaction-like,.reaction-dislike{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    column-gap: 0.2rem;
+}

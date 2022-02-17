@@ -1,0 +1,109 @@
+
+.login-main-container{
+    margin-bottom:1.5rem ;
+}
+
+.LoginFormContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginFormContainer .form__group {
+    position: relative !important;
+    padding: 0.9rem 0 !important;
+    margin-top: 0.55rem !important;
+    width: 100% !important;
+}
+
+.LoginFormContainer .form__field {
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid var(--white);
+    outline: 0;
+    font-size: 1.3rem;
+    color: var(--white);
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin: 1.5rem 0;
+}
+
+.LoginFormContainer .form__field::placeholder {
+     color: transparent;
+}
+
+.LoginFormContainer .form__field:placeholder-shown ~ .form__label {
+     font-size: 1.3rem;
+     cursor: text;
+     top: 20px;
+}
+
+.LoginFormContainer .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--white);
+}
+
+.LoginFormContainer .form__field:focus ~ .form__label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--secondary-theme-color);
+    font-weight:700;
+}
+
+.LoginFormContainer .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right,var(--secondary-theme-color),var(--main-theme-color));
+    border-image-slice: 1;
+}
+
+.LoginFormContainer .form__field:required,.form__field:invalid{
+     box-shadow:none; 
+}
+
+
+
+
+.LoginFormContainer button[type=submit]{
+    border-radius: 999px;
+    padding: 0.5em 1.2em;
+    margin: 0.6rem 0;
+    text-decoration: none;
+    font-weight: 100;
+    
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    word-break: break-word;
+    background-color:var(--main-theme-color);
+    color: #fff;
+    transition: all 1s;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+
+
+.LoginFormContainer button[type=submit]:hover,.LoginFormContainer button[type=submit]:active{
+    background-color: var(--secondary-theme-color);
+}
+

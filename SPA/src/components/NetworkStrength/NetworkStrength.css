@@ -1,0 +1,12 @@
+﻿.network-strength-points{
+    color: var(--white);
+    background-color: var(--main-theme-color);
+    
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 0.8rem;
+    width: 100%;
+    text-align: center;
+    border-radius: 999px;
+    border: 1px solid var(--white);
+}

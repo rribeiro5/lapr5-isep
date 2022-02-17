@@ -1,0 +1,7 @@
+.LoggedRegionContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    max-width: 1368px;
+}

@@ -1,0 +1,83 @@
+:-[sinonimos].
+
+:-dynamic uniqueListElement/1.
+
+/*
+%intersect two lists and return the size of the result
+intersect_with_len([],_,[],0):-!.
+
+
+intersect_with_len([T|Ltags1],Ltags2,[T|Ltags3],X):-
+	member(T,Ltags2),
+	intersect_with_len(Ltags1,Ltags2,Ltags3,X1),!,
+	X is X1+1.
+*/
+	
+intersect_with_len([_|Ltags1],Ltags2,Ltags3,X):-
+	intersect_with_len(Ltags1,Ltags2,Ltags3,X).
+	
+
+
+%Flatten keeping unique values
+
+flatten_unique(LTagsToExcept,[A|B],L):-
+	flatten_unique1(LTagsToExcept,[A|B],L),
+	!,retractall(uniqueListElement(_)).
+
+
+flatten_unique(LTagsToExcept,[[A|B]|C],L):-
+	flatten_unique1(LTagsToExcept,[[A|B]|C],L),
+	!,retractall(uniqueListElement(_)).
+
+
+flatten_unique1(_,[],L):-
+	!,findall(S,uniqueListElement(S),L).
+
+
+flatten_unique1(LTagsToExcept,[[A|B]|C],L1):-
+	append_unique([A|B],C,L2),
+	flatten_unique1(LTagsToExcept,L2,L1).
+
+
+flatten_unique1(LTagsToExcept,[X|C],L):-
+	get_sinonimo(X,X1),
+	\+member(X1,LTagsToExcept),
+	\+uniqueListElement(X1),
+	X\==[],
+	assertz(uniqueListElement(X1)),
+	!,flatten_unique1(LTagsToExcept,C,L).
+
+
+flatten_unique1(LTagsToExcept,[_|C],[Y|L1]):-
+	flatten_unique1(LTagsToExcept,C,[Y|L1]).
+
+
+get_sinonimo(Palavra,Sinonimo):-
+	sinonimo(Sinonimo,Palavra),!.
+
+
+get_sinonimo(Palavra,Palavra):-!.
+
+
+%Append keeping only unique values
+
+append_unique([],L,L):-!.
+
+append_unique([A|B],C,[A|D]):-
+	\+member(A,C),!,
+	append_unique(B,C,D).
+
+
+append_unique([_|B],C,D):-
+	append_unique(B,C,D).
+
+
+remove_duplicates([],[]):-!.
+
+remove_duplicates([H|T],[H|T1]):- 
+    \+member(H,T), 
+    remove_duplicates(T,T1).
+
+
+remove_duplicates([_|T],T1):- 
+	remove_duplicates(T,T1).

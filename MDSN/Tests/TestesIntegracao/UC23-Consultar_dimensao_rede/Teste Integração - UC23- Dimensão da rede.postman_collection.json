@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "287ba19c-9e5e-43bf-8a6a-6275c7c4042d",
+		"name": "Teste Integração - UC23- Dimensão da rede",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clean Database",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dimensão da rede é zero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Dimension is 0\", function () {\r",
+							"    pm.expect(responseJson.value).to.eql(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/UserNetwork/networkDimension",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"UserNetwork",
+						"networkDimension"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"user_id1\", responseJson.id);\r",
+							"\r",
+							"pm.test(\"Email is correct\", function () {\r",
+							"    pm.expect(responseJson.email).to.eql(\"1@gmail.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"1@gmail.com\",\r\n    \"name\":\"Teste1\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd1\",\r\n    \"description\":\"crl1\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"user_id2\", responseJson.id);\r",
+							"\r",
+							"pm.test(\"Email is correct\", function () {\r",
+							"    pm.expect(responseJson.email).to.eql(\"2@gmail.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"2@gmail.com\",\r\n    \"name\":\"Teste2\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste2\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest2\",\r\n    \"password\":\"Password2?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd2\",\r\n    \"description\":\"crl2\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"user_id3\", responseJson.id);\r",
+							"\r",
+							"pm.test(\"Email is correct\", function () {\r",
+							"    pm.expect(responseJson.email).to.eql(\"3@gmail.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"3@gmail.com\",\r\n    \"name\":\"Teste3\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste3\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest3\",\r\n    \"password\":\"Password3?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd3\",\r\n    \"description\":\"crl3\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dimensão da rede é 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Dimension is 3\", function () {\r",
+							"    pm.expect(responseJson.value).to.eql(3);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/UserNetwork/networkDimension",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"UserNetwork",
+						"networkDimension"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teardown",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "user_id1",
+			"value": ""
+		},
+		{
+			"key": "user_id2",
+			"value": ""
+		},
+		{
+			"key": "user_id3",
+			"value": ""
+		},
+		{
+			"key": "request_1_2",
+			"value": ""
+		},
+		{
+			"key": "request_2_3",
+			"value": ""
+		}
+	]
+}

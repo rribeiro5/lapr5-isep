@@ -1,0 +1,33 @@
+.UserNetwork{
+    width: 100%;
+}
+
+.UserNetwork form{
+    display: flex;
+}
+
+.UserNetwork form  input[type=submit]{
+    border-radius: 999px;
+    padding: 0.5em 1.2em;
+    margin: 1.2rem 0;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: var(--main-theme-color) 0 3px 8px ;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 60%;
+    word-break: break-word;
+    border:0;
+    background-color:var(--main-theme-color);
+    color: #fff;
+    transition: 1s opacity;
+}
+
+.UserNetwork li{
+    font-size: 1.2rem;
+}

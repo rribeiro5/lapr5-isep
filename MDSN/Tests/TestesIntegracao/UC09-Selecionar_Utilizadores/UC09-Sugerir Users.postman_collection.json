@@ -1,0 +1,833 @@
+{
+	"info": {
+		"_postman_id": "982af8ce-c2f8-4495-97f4-6fd95e741ed3",
+		"name": "UC09-Sugerir Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete all before all",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are no user profiles\", function () {",
+							"    pm.response.to.have.body(\"[]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create User A",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"",
+							"pm.collectionVariables.set(\"user_id1\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id1\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name\", \"userUC09A\");",
+							"pm.collectionVariables.set(\"email\", \"uc09A@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/11/02\");",
+							"pm.collectionVariables.set(\"city\", \"Lisbon\");",
+							"pm.collectionVariables.set(\"description\", \"user uc09\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+351123456\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\", \"tag3\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User just created A",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id1\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create User B",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"user_id2\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id2\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name\", \"userUC09B\");",
+							"pm.collectionVariables.set(\"email\", \"uc09B@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/09/12\");",
+							"pm.collectionVariables.set(\"city\", \"Lisbon\");",
+							"pm.collectionVariables.set(\"description\", \"user uc09B\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511256321\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\", \"tag3\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User just created B",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id2\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create User C",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"user_id3\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id3\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name\", \"userUC09C\");",
+							"pm.collectionVariables.set(\"email\", \"uc09C@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/03/12\");",
+							"pm.collectionVariables.set(\"city\", \"Lisbon\");",
+							"pm.collectionVariables.set(\"description\", \"user uc09C\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511256321\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\", \"tag3\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User just created C",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id3\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create User D",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"user_id4\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id4\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name\", \"userUC09D\");",
+							"pm.collectionVariables.set(\"email\", \"uc09D@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/03/12\");",
+							"pm.collectionVariables.set(\"city\", \"Lisbon\");",
+							"pm.collectionVariables.set(\"description\", \"user uc09D\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511256321\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\", \"tag3\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User just created D",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id4\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id4}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id4}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create User E",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"user_id5\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id5\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name\", \"userUC09E\");",
+							"pm.collectionVariables.set(\"email\", \"uc09E@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/03/12\");",
+							"pm.collectionVariables.set(\"city\", \"Lisbon\");",
+							"pm.collectionVariables.set(\"description\", \"user uc09E\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511256321\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\", \"tag3\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User just created E",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id5\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id5}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id5}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suggest Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"\r",
+							"pm.test(\"User creation returns status 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Size Equals 3\", function () {\r",
+							"    pm.expect(responseJson.length).to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/suggestUsers/{{user_id1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"suggestUsers",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "birthdayDate",
+			"value": ""
+		},
+		{
+			"key": "city",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		},
+		{
+			"key": "telephoneNumber",
+			"value": ""
+		},
+		{
+			"key": "interestTags",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "user_id1",
+			"value": ""
+		},
+		{
+			"key": "user_id2",
+			"value": ""
+		},
+		{
+			"key": "user_id3",
+			"value": ""
+		},
+		{
+			"key": "user_id4",
+			"value": ""
+		},
+		{
+			"key": "user_id5",
+			"value": ""
+		}
+	]
+}

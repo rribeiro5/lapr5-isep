@@ -1,0 +1,33 @@
+﻿.post-main-container{
+    width: 100%;
+}
+
+.post-form-container,.post-form-container> *{
+    width: 100%;
+    
+}
+
+.post-form-input-text{
+    resize:none;
+    padding: 0 0.125rem;
+    border:0;
+    border-bottom: 1px solid var(--gray);
+    background: var(--main-background-color);
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+}
+
+
+button.submitButton{
+    padding: 1.1rem;
+    text-align: center;
+    line-height: 0;
+    box-sizing: border-box;
+    align-self: center;
+    border-radius:15px ;
+}
+
+.post-main-container .react-tagsinput{
+    width: 100%;
+    border-radius:15px ;
+}

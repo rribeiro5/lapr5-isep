@@ -1,0 +1,148 @@
+
+.pro-sidebar{
+    padding-top: 1.5rem;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--main-background-color);
+    z-index: 0;
+}
+
+.pro-sidebar-content{
+    overflow-y: visible;
+}
+
+.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-footer{
+    border: 0; /* retirar a border do footer*/
+}
+
+.pro-sidebar .pro-menu{
+    margin: 0.25rem 0; /* Margin entre dois Menu*/
+}
+
+
+
+
+.pro-sidebar-header{
+    margin-bottom: 10px;
+}
+
+.pro-sidebar > .pro-sidebar-inner{
+    width: 100%;
+    background-color: var(--main-background-color);
+    border: 0;
+}
+
+.SidebarHeaderTitle{
+    font-size:1.7rem;
+    font-weight: bold;
+}
+
+.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-header{
+    border: 0;
+    padding-left:6px;
+}
+
+.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-content{
+    border: 0;
+}
+
+/** Fonte dentro do dropdown menu */
+.pro-item-content{
+    font-size:0.9rem;
+    font-weight: 500;
+}
+
+
+.pro-item-content:hover,.pro-item-content:focus,.pro-item-content:active {
+    color: var( --bright-pink);
+}
+
+.pro-sidebar .pro-menu a,.pro-item-content a{
+    color:var(--white);
+    transition: color 0.5s linear,border-bottom-color 1s linear ;
+    
+}
+
+.pro-sidebar .pro-menu a:hover,.pro-sidebar .pro-menu a:active,.pro-sidebar .pro-menu a:focus,.pro-item-content a:hover,.pro-item-content a:active{
+    color: var(--bright-pink);
+}
+
+.pro-sub-menu > .pro-inner-item{
+    display: flex;
+    align-items: center;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item{
+    padding: 0;
+    border: 0;
+    transition: all 1s;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item:active,.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item:hover{
+    transform: translateX(10%);
+}
+
+
+.pro-inner-item > .pro-item-content{
+    padding-bottom: 5px;
+}
+
+/** div responsavel pelo dropdown*/
+.pro-inner-list-item{
+    box-shadow: var(--secondary-theme-color) 0px 2px 15px, var(--main-theme-color) 0px 0px 3px 2px;
+    max-width: 85%;
+    border-radius: 5px;
+    padding: 0.1rem 1rem;
+}
+
+/* cada div dentro do dropdown*/
+
+.pro-inner-list-item .pro-menu-item{
+    margin: 0.9rem 0;
+}
+
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-icon-wrapper{
+    margin-right: 1.4rem; /* Margin desde icone ate texto */
+    font-size: 1.8rem; /* Tamanho do icone */
+    overflow-x:hidden ;
+}
+
+.pro-icon-wrapper{
+    margin-right: 1.4rem; /* Margin desde icone ate texto */
+    font-size: 1.8rem; /* Tamanho do icone */
+}
+
+.suffix-wrapper{
+    /** icone depois do titulo do dropdown menu*/
+    margin-left: 0.9rem; /* Margin desde icone ate texto */
+    font-size: 1.8rem;
+    padding-top: 6px;
+}
+
+
+.pro-sidebar .pro-menu.shaped .pro-menu-item > .pro-inner-item > .pro-icon-wrapper{
+    background-color: var( --bright-pink);
+}
+
+.pro-sub-menu {
+    padding: 10px 0 10px 2px;
+}
+
+.pro-inner-list-item .pro-menu-item > .pro-inner-item{
+    padding: 0.2rem;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.pro-inner-list-item .pro-menu-item > .pro-inner-item a:hover,.pro-inner-list-item .pro-menu-item > .pro-inner-item a:active{
+    border-bottom: 1px solid var( --bright-pink);
+}
+
+
+/** footer */
+
+.pro-sidebar-footer{
+    margin-bottom: 10%;
+}

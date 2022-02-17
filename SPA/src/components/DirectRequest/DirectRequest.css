@@ -1,0 +1,77 @@
+.DirectRequestContainer{
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.DirectRequestContainer .criteria-form{
+    color:var(--main-background-color);
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    border-radius: 5px;
+    
+}
+
+.DirectRequestContainer .criteria-form select,.DirectRequestContainer .criteria-form option,.DirectRequestContainer .criteria-form input,.DirectRequestContainer .criteria-form button {
+    background-color: var(--main-background-color);
+    color:var(--white);
+    font-size: 1.1rem;
+    border: 1px var(--white) solid;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+}
+
+
+
+.DirectRequestContainer .Results{
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 60%;
+}
+
+.DirectRequestContainer .Results .sugestion .user-info{
+    
+}
+
+.friend-span{
+    border-radius: 999px;
+    padding: 0.3rem 0.7em;
+    text-decoration: none;
+    font-weight: lighter;
+    font-size: 0.9rem;
+    opacity: 1;
+    word-break: break-word;
+    background-color: var(--main-theme-color);
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.direct-request-result-action{
+    width: 25%;
+    display: flex;
+}
+
+.direct-request-result-action > *{
+    width: 100%;
+}
+
+.friend-span{
+    color: var(--white);
+    background-color: var(--main-theme-color);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.25rem 0.8rem;
+    width: 100%;
+    text-align: center;
+    border-radius: 999px;
+    border: 1px solid var(--white);
+}

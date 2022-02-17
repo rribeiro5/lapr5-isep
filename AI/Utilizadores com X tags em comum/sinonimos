@@ -1,0 +1,17 @@
+sinonimo(natureza,ar).
+sinonimo(natureza,arvore).
+sinonimo(musica,arte).
+sinonimo(musica,musico).
+
+
+%change to synonim
+change_to_synonims([],[]):-!.
+
+
+change_to_synonims([H1|L1],[Sinonimo|L2]):-
+	sinonimo(Sinonimo,H1),!,
+	change_to_synonims(L1,L2).
+
+	
+change_to_synonims([H|L1],[H|L2]):-
+	change_to_synonims(L1,L2).

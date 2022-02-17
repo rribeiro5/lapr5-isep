@@ -1,0 +1,14 @@
+﻿.TrajectViewerContainer{
+    margin: 2.0rem 0;
+    width: 100%;
+    text-align: center;
+    font-weight: lighter;
+}
+.TrajectViewerContainer h3{
+    margin: 0.4rem 0;
+    font-size: 1.2rem;
+}
+
+.TrajectViewerContainer .Traject div:last-child svg{
+    visibility: hidden;
+}

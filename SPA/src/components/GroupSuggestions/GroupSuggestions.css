@@ -1,0 +1,176 @@
+﻿.group-suggestion-main-container{
+    width: 100%;
+}
+
+
+.group-suggestion-form h3,.group-suggestions-viewer-title h3{
+    text-decoration: underline;
+    padding: 0.2rem;
+}
+
+.group-suggestions-viewer-title h3{
+    margin-top: 1rem;
+}
+
+.group-suggestion-form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    overflow-y: visible;
+}
+
+.group-suggestion-form .form__group {
+    position: relative;
+    padding: 0.5rem 0 0;
+    margin-top: 1rem;
+    width: 60%;
+}
+
+.group-suggestion-form .rgpd-field{
+    padding: 1.5rem 0;
+}
+
+.group-suggestion-form .rgpd-field .form__label {
+    width: 100%;
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+
+
+
+.MuiOutlinedInput-root {
+    border: 1px solid var(--white);
+}
+
+.group-suggestion-form .form__field , .modal .form__field{
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid var(--white);
+    outline: 0;
+    font-size: 1rem;
+    font-weight: lighter;
+    color: var(--white);
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin: 0.4rem 0;
+}
+
+.group-suggestion-form .form__field option , .modal .form__field option{
+    background-color: var(--main-background-color);
+}
+
+
+.group-suggestion-form .form__field::placeholder , .modal .form__field::placeholder {
+    color: transparent;
+}
+
+
+.group-suggestion-form .form__field:placeholder-shown ~ .form__label , .modal .form__field:placeholder-shown ~ .form__label{
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+
+.group-suggestion-form .form__label, .modal .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+
+.group-suggestion-form .form__field:focus ~ .form__label,.modal .form__field:focus ~ .form__label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--bright-pink);
+    font-weight:700;
+}
+
+
+.group-suggestion-form .form__field:focus,.modal .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right,var(--bright-pink),var(--main-theme-color));
+    border-image-slice: 1;
+}
+
+
+.group-suggestion-form .form__field:required,.form__field:invalid,.modal .form__field:required, .modal .form__field:invalid {
+    box-shadow:none;
+}
+
+.group-suggestion-list-container{
+    padding: 1.0rem 0;
+    width: 60%;
+}
+
+.group-suggestion-list-container .react-dual-listbox{
+    padding: 1.0rem 0;
+}
+
+
+.group-suggestion-list-container .react-dual-listbox ,.group-suggestion-list-container .rdl-actions button{
+    color:var(--main-background-color);
+}
+
+.fa-chevron-right::after{
+    content:'>';   
+    color: black;
+}
+
+.fa-chevron-left::after{
+    color: black;
+    content:'<';
+}
+
+
+.group-suggestion-form .submitButton {
+    border-radius: 999px;
+    padding: 0.5em 1.2em;
+    margin: 1.2rem 0;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: var(--main-theme-color) 0 3px 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 60%;
+    word-break: break-word;
+    border: 0;
+    background-color: var(--main-theme-color);
+    color: #fff;
+    transition: 1s opacity;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.rdl-list-box label {
+    color: var(--main-background-color);
+}
+.rdl-control-container select option{
+    color: var(--main-background-color);
+    text-decoration: underline black;
+    margin: 5px;
+}

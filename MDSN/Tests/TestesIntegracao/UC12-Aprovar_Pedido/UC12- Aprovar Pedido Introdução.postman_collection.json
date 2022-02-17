@@ -1,0 +1,1001 @@
+{
+	"info": {
+		"_postman_id": "b44c12c6-f69d-4685-9405-f04936ba9378",
+		"name": "Teste Integração - UC12- Aprovar Pedido Introdução",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete all before all",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are no users\", function () {",
+							"    pm.response.to.have.body(\"[]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Origin User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"user_id1\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id1\"));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name1\", \"user1\");",
+							"pm.collectionVariables.set(\"email\", \"1@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/01/01\");",
+							"pm.collectionVariables.set(\"city\", \"city1\");",
+							"pm.collectionVariables.set(\"description\", \"desc1\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511234\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\"]);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name1}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Origin User just created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id1\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Intermediate User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"/*",
+							"var responseList=responseJson.interestTags;",
+							"var expectedList=pm.environment.get(\"interestTags\");",
+							"",
+							"pm.test(\"Body returns the correct tags\", function () {",
+							"    pm.expect(responseList).to.have.deep.members(expectedList)",
+							"});",
+							"*/",
+							"pm.collectionVariables.set(\"user_id2\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id2\"));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name2\", \"user2\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name2}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Intermediate User just created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id2\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Destination User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"/*",
+							"var responseList=responseJson.interestTags;",
+							"var expectedList=pm.environment.get(\"interestTags\");",
+							"",
+							"pm.test(\"Body returns the correct tags\", function () {",
+							"    pm.expect(responseList).to.have.deep.members(expectedList)",
+							"});",
+							"*/",
+							"pm.collectionVariables.set(\"user_id3\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id3\"));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name3\", \"user3\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name3}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Destination User just created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id3\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Direct Connection Request User 1 to 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"request_1_2\", responseJson.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\": \"{{user_id1}}\",\r\n    \"DestUser\": \"{{user_id2}}\",\r\n    \"MessageOrigToDest\": \"Teste\",\r\n    \"ConnStrengthReq\": 4,\r\n    \"ConnTagsReq\": [\r\n        \"ABC\",\r\n        \"DEF\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/directConnection",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"directConnection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aceitar Direct Connection Request User 1 to 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Answer\":true,\r\n    \"ConnectionStrength\":5,\r\n    \"Tags\":[\"Futebol\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/acceptance/{{request_1_2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"acceptance",
+						"{{request_1_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Conection Between User1 and User 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/connections/user/{{user_id1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"connections",
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Direct Connection Request User 2 to 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"request_2_3\", responseJson.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\": \"{{user_id2}}\",\r\n    \"DestUser\": \"{{user_id3}}\",\r\n    \"MessageOrigToDest\": \"Teste\",\r\n    \"ConnStrengthReq\": 4,\r\n    \"ConnTagsReq\": [\r\n        \"ABC\",\r\n        \"DEF\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/directConnection",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"directConnection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aceitar Direct Connection Request User 2 to 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Answer\":true,\r\n    \"ConnectionStrength\":5,\r\n    \"Tags\":[\"Futebol\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/acceptance/{{request_2_3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"acceptance",
+						"{{request_2_3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Conection Between User2 and User3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/connections/user/{{user_id2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"connections",
+						"user",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connection Requests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"There are no connection requests\", function () {\r",
+							"    pm.response.to.have.body(\"[]\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/user/{{user_id1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Connection Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson=pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connection3_id\",responseJson.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\":\"{{user_id1}}\",\r\n    \"InterUser\":\"{{user_id2}}\",\r\n    \"DestUser\":\"{{user_id3}}\",\r\n    \"MessageOrigToDest\":\"to Dest\",\r\n    \"MessageOrigToInter\":\"To interm\",\r\n    \"ConnectionStrength\":2,\r\n    \"tags\":[\"tag1\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/introductionRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"introductionRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Created Connection Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson=pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"console.log(\"=======================================\")\r",
+							"console.log(\"response:\"+responseJson)\r",
+							"console.log(\"var:\"+pm.collectionVariables.get(\"connection3_id\"))\r",
+							"\r",
+							"pm.test(\"Request has same id\", function(){\r",
+							"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"connection3_id\"));\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/pendingApproval/{{user_id2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"pendingApproval",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Approve Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson=pm.response.json()\r",
+							"\r",
+							"pm.test(\"Origin user is user1\", function () {\r",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"connection3_id\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{connection3_id}}\",\r\n    \"approved\":true,\r\n    \"MessageInterToDest\":\"approved\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/approval/{{connection3_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"approval",
+						"{{connection3_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connection Request From user1 to user3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"responseJson =pm.response.json();\r",
+							"\r",
+							"pm.test(\"Origin user is user1\", function () {\r",
+							"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"connection3_id\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/user/{{user_id3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"user",
+						"{{user_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tear down",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "name1",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "birthdayDate",
+			"value": ""
+		},
+		{
+			"key": "city",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		},
+		{
+			"key": "telephoneNumber",
+			"value": ""
+		},
+		{
+			"key": "interestTags",
+			"value": ""
+		},
+		{
+			"key": "user_id1",
+			"value": ""
+		},
+		{
+			"key": "name2",
+			"value": ""
+		},
+		{
+			"key": "user_id2",
+			"value": ""
+		},
+		{
+			"key": "name3",
+			"value": ""
+		},
+		{
+			"key": "user_id3",
+			"value": ""
+		},
+		{
+			"key": "connection1_id",
+			"value": ""
+		},
+		{
+			"key": "connection2_id",
+			"value": ""
+		},
+		{
+			"key": "connection3_id",
+			"value": ""
+		},
+		{
+			"key": "request_1_2",
+			"value": ""
+		},
+		{
+			"key": "request_2_3",
+			"value": ""
+		}
+	]
+}

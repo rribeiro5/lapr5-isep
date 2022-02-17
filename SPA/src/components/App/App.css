@@ -1,0 +1,48 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  text-align: center;
+  background-color: var(--main-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup-button{
+  border-radius: 999px;
+  padding: 0.5em 1.2em;
+  margin: 0.6rem 0;
+  text-decoration: none;
+  font-weight: 100;
+
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 24px;
+  opacity: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  word-break: break-word;
+  background-color:var(--main-theme-color);
+  color: #fff;
+  transition: opacity 1s;
+  border: 0;
+}
+
+
+.popup-content{
+  background-color: var(--main-background-color) ;
+  border-radius: 10px;
+}
+
+.lang-select {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black;
+}
+
+.lang-select ul {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.5);
+}

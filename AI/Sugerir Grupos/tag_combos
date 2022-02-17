@@ -1,0 +1,14 @@
+all_combos(X,LTags,LTagsObrigatorias,LcombXTags):-
+	findall(L2,(combo(X,LTags,L),append(L,LTagsObrigatorias,L2)),LcombXTags).
+
+
+combo(0,_,[]):-!.
+
+
+combo(X,[Tag|L],[Tag|T]):-
+	X1 is X-1,
+	combo(X1,L,T).
+
+
+combo(X,[_|L],T):-
+	combo(X,L,T).

@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "33a86b3a-3df9-446f-bfa0-da539d1483bc",
+		"name": "Testes Integracao - UC13 - Fazer Post (MDRS+MDP)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Try to create post with non existing user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 for non-existing user\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"001e8bfd-dc22-430d-abad-c869d3559a7c\",\r\n    \"text\":\"O meu 1o post\",\r\n    \"tags\":[]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create posting user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson=pm.response.json()\r",
+							"\r",
+							"pm.test(\"Body returns the correct email\", function () {\r",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body returns the correct name\", function () {\r",
+							"    pm.expect(responseJson.name).to.eql(pm.collectionVariables.get(\"name\"));\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body returns the correct emotional state\", function () {\r",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"userId\",responseJson.id)\r",
+							"\r",
+							"console.log(pm.collectionVariables.get(\"userId\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name\",\"user1\")\r",
+							"pm.collectionVariables.set(\"email\", \"1@gmail.com\")\r",
+							"pm.collectionVariables.set(\"password\", \"Password1?\")\r",
+							"pm.collectionVariables.set(\"city\",\"Mirandela\")\r",
+							"pm.collectionVariables.set(\"description\",\"Sou o user1\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"{{name}}\",\r\n    \"email\":\"{{email}}\",\r\n    \"password\":\"{{password}}\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"{{city}}\",\r\n    \"description\":\"{{description}}\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson=pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body returns the correct text\", function () {\r",
+							"    pm.expect(responseJson.text).to.eql(\"o meu primeiro post\");\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"postId\",responseJson.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"{{userId}}\",\r\n    \"text\":\"o meu primeiro post\",\r\n    \"tags\":[]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post Created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson=pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"comments array has 0 elements\", function () {\r",
+							"    pm.expect(responseJson.comments.length).to.eql(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"reactions array has 0 elements\", function () {\r",
+							"    pm.expect(responseJson.reactions.length).to.eql(0)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2000/api/posts/{{postId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"posts",
+						"{{postId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2000/api/test/posts/{{postId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"test",
+						"posts",
+						"{{postId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "postId",
+			"value": ""
+		},
+		{
+			"key": "commentId",
+			"value": ""
+		},
+		{
+			"key": "commentUserId",
+			"value": ""
+		},
+		{
+			"key": "text",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "city",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		}
+	]
+}

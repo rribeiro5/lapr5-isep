@@ -1,0 +1,151 @@
+.popup-content{
+    background-color: var(--main-background-color) ;
+    border-radius: 10px;
+    overflow-y: visible;
+}
+
+
+.profile-container{
+    
+    border-radius:5px ;
+    position: relative;
+    width: 100%;
+    text-align: initial;
+    
+    
+}
+
+.profile-info-container{
+    border-bottom: 1px solid var(--white);
+    padding: 1.4rem;
+}
+
+.profile-feed-container{
+    padding: 1.4rem;
+    
+}
+
+
+
+.profile-actions-container{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    row-gap: 1.2rem;
+    min-height: 100%;
+}
+
+
+.profile-container .round {
+    border: 1px solid var(--secondary-background-color);
+    border-radius: 100%;
+    padding: 5px;
+    max-width: 100px;
+}
+
+.profile-row-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction: row;
+}
+
+
+.profile-container .userInfoContainer{
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}
+
+
+.profile-container p{
+    font-weight: lighter;
+    font-size: 1rem;
+    line-height: 1.6rem;
+}
+
+
+.profile-container h3{
+    margin: 0.25rem 0 0.8rem;
+    font-size: 1.3rem;
+}
+
+.profile-container h6{
+    color: #a5a5a5;
+    margin: 0.1rem 0;
+    font-size: 1rem;
+    font-weight: lighter;
+}
+
+
+.profile-container .buttons{
+    padding: 0 30px ;
+}
+
+.profile-container  button {
+    background-color: var(--main-background-color);
+    border-radius: 999px;
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 900;
+    padding: 0.5rem 1.4rem;
+    border: 1px solid var(--white);
+    width: 100%;
+    transition: all 1s;
+    cursor: pointer;
+    
+}
+.profile-container  button:hover{
+    text-decoration: underline;
+}
+
+
+.EditProfileForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal .submitButton, .modal .deleteProfileButton{
+    border-radius: 999px;
+    padding: 0.5em 1.2em;
+    margin: 1.2rem 0;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: var(--main-theme-color) 0 3px 8px ;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 60%;
+    word-break: break-word;
+    border:0;
+    background-color:var(--main-theme-color);
+    color: #fff;
+    transition: 1s opacity;
+}
+
+.modal .deleteProfileButton{
+    box-shadow: var(--toastify-color-error) 0 3px 8px ;
+    background-color: var(--toastify-color-error);
+}
+
+.modal .deleteProfileButton:hover,.modal .submitButton:hover{
+    text-decoration: underline white;
+}
+
+.delete-profile-container{
+    padding: 1.5rem;
+}

@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "efe853de-aec0-4853-b376-61d3afdbb0df",
+		"name": "Testes Integracao  UC13 - Fazer Post (MDP)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson=pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"UserId is correct\", function () {\r",
+							"    pm.expect(responseJson.userId).to.eql(pm.collectionVariables.get(\"userId\"))\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Txt is correct\", function () {\r",
+							"    pm.expect(responseJson.text).to.eql(pm.collectionVariables.get(\"text\"))\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"postId\",responseJson.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"userId\",\"001e8bfd-dc22-430d-abad-c869d3559a7c\")\r",
+							"pm.collectionVariables.set(\"text\", \"O meu primeiro post\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"{{userId}}\",\r\n    \"text\":\"{{text}}\",\r\n    \"tags\":[]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:2000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post Created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson=pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"comment array has 0 elements\", function () {\r",
+							"    \r",
+							"    pm.expect(responseJson.comments.length).to.eql(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"reactions array has 0 elements\", function () {\r",
+							"    \r",
+							"    pm.expect(responseJson.reactions.length).to.eql(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"tag array has 0 elements\", function () {\r",
+							"    \r",
+							"    pm.expect(responseJson.tags.length).to.eql(0)\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2000/api/posts/{{postId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"posts",
+						"{{postId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2000/api/test/posts/{{postId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"test",
+						"posts",
+						"{{postId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "postId",
+			"value": ""
+		},
+		{
+			"key": "commentId",
+			"value": ""
+		},
+		{
+			"key": "commentUserId",
+			"value": ""
+		},
+		{
+			"key": "text",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "tags",
+			"value": ""
+		}
+	]
+}

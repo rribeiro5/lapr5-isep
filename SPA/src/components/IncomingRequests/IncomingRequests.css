@@ -1,0 +1,114 @@
+.IncomingRequests{
+    width: 100%;
+    text-align: left;
+}
+
+.incomingRequest{
+    padding: 1.5rem 2.5rem;
+    width: 100%;
+    border-bottom:1px solid var(--white) ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.requestInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+
+.sb-avatar{
+    border: 1px solid var(--secondary-background-color);
+}
+
+.sb-avatar img{
+    padding: 5px;
+}
+
+.requestInfo .Preview{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+}
+
+
+
+.requestInfo .information{
+    padding: 0.5rem 2.0rem;
+    width: 100%;
+}
+
+
+.incomingRequest h4{
+    font-weight: 100;
+    font-size: 1.4rem;
+}
+
+.requestInfo .information p{
+    font-size: 1.4rem;
+    font-weight: 100;
+}
+
+.requestAction{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.requestAction button{
+    border-radius: 999px;
+    padding: 0.5em 1.0em;
+    margin: 0.3rem 0;
+    text-decoration: none;
+    font-weight: 200;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 40%;
+    word-break: break-word;
+    color: #fff;
+    background-color:var(--main-background-color);
+    border: 1px solid var(--white);
+    transition: box-shadow 0.5s;
+}
+
+.requestAction .accept,.requestAction .approve{
+    transition: box-shadow 0.5s;
+}
+
+.requestAction .accept:hover,.requestAction .approve:hover,.requestAction .accept:active,.requestAction .approve:active{
+    box-shadow: var(--white) 0 3px 8px ;
+}
+.requestAction :nth-child(1):hover{
+    box-shadow: var(--white) 0 3px 8px ;
+}
+
+
+.requestAction .reject{
+    background-color:#ee0c3e;
+    transition: box-shadow 0.5s;
+}
+
+.requestAction .reject:hover{
+    box-shadow: #ee0c3e 0 3px 8px ;
+}
+
+

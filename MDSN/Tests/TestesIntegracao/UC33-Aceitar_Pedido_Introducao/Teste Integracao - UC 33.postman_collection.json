@@ -1,0 +1,840 @@
+{
+	"info": {
+		"_postman_id": "048dc74f-18ff-420e-b554-dae9495989be",
+		"name": "Teste Integracao - UC 33",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clean Database",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ensure no Users Registered",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are no user profiles\", function () {",
+							"    pm.response.to.have.body(\"[]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Matches birthDayDate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.birthDayDate).to.eql(\"2000/1/1\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Matches Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"5@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"userId1\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"5@gmail.com\",\r\n    \"name\":\"Teste5\",\r\n    \"avatar\":\"http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd5\",\r\n    \"description\":\"c3\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Matches birthDayDate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.birthDayDate).to.eql(\"2000/1/1\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Matches Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"6@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"userId2\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"6@gmail.com\",\r\n    \"name\":\"Teste6\",\r\n    \"avatar\":\"http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd6\",\r\n    \"description\":\"c6\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag3\",\r\n        \"tag4\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Matches birthDayDate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.birthDayDate).to.eql(\"2000/1/1\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Matches Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"7@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"userId3\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"7@gmail.com\",\r\n    \"name\":\"Teste7\",\r\n    \"avatar\":\"http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd7\",\r\n    \"description\":\"c7\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ensure user 1 & user 2 & user 3 resgistered",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test(\"There are 3 users \", function () {",
+							"    pm.expect(data.length).to.equal(3);",
+							"});",
+							"",
+							"let u1 = data[0];",
+							"let u2 = data[1];",
+							"let u3 = data[2];",
+							"",
+							"let user1 = pm.globals.get(\"userId1\")",
+							"let user2 = pm.globals.get(\"userId2\")",
+							"let user3 = pm.globals.get(\"userId3\")",
+							"",
+							"pm.test(\"This is user1 \", function () {",
+							"    pm.expect(u1.id).to.equal(user1);",
+							"});",
+							"",
+							"pm.test(\"This is user2 \", function () {",
+							"    pm.expect(u2.id).to.equal(user2);",
+							"});",
+							"",
+							"pm.test(\"This is user3 \", function () {",
+							"    pm.expect(u3.id).to.equal(user3);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido de ligacao direta por User 1 a User 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let u1 = pm.globals.get(\"userId1\");\r",
+							"let u2 = pm.globals.get(\"userId2\");\r",
+							"\r",
+							"pm.test(\"Check Origin User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.origUser.value).to.eql(u1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Destinitary User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.destUser.value).to.eql(u2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check direct message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.messageOrigToDest).to.eql(\"Olá conheco-te da escola, gostarias de ser amigo?\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"request1Id\",response.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\": \"{{userId1}}\",\r\n    \"DestUser\": \"{{userId2}}\",\r\n    \"MessageOrigToDest\": \"Olá conheco-te da escola, gostarias de ser amigo?\",\r\n    \"ConnStrengthReq\": 5,\r\n    \"ConnTagsReq\": [\r\n        \"Bemfica\",\r\n        \"Xadrez\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/directConnection",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"directConnection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido de ligacao direta por User 2 A User 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"let u2 = pm.globals.get(\"userId2\");\r",
+							"let u3 = pm.globals.get(\"userId3\");\r",
+							"\r",
+							"pm.test(\"Check Origin User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.origUser.value).to.eql(u2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Destinitary User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.destUser.value).to.eql(u3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check direct message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.messageOrigToDest).to.eql(\"Olá, conheco-te do trabalho\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"request2Id\",response.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\": \"{{userId2}}\",\r\n    \"DestUser\": \"{{userId3}}\",\r\n    \"MessageOrigToDest\": \"Olá, conheco-te do trabalho\",\r\n    \"ConnStrengthReq\": 4,\r\n    \"ConnTagsReq\": [\r\n        \"C#\",\r\n        \"Trabalho\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/directConnection",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"directConnection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aceitar Pedido de ligacao direta por User 1 a user 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let user1 = pm.globals.get(\"userId1\")\r",
+							"let user2 = pm.globals.get(\"userId2\")\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check user1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user1).to.eql(user1);\r",
+							"});\r",
+							"pm.test(\"Check user2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user2).to.eql(user2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Answer\":true,\r\n    \"ConnectionStrength\":5,\r\n    \"Tags\":[\"Futebol\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/acceptance/{{request1Id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"acceptance",
+						"{{request1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aceitar Pedido de ligacao direta por User 2 a user 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let user2 = pm.globals.get(\"userId2\")\r",
+							"let user3 = pm.globals.get(\"userId3\")\r",
+							"\r",
+							"pm.test(\"Check user2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user1).to.eql(user2);\r",
+							"});\r",
+							"pm.test(\"Check user3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user2).to.eql(user3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Answer\":true,\r\n    \"ConnectionStrength\":5,\r\n    \"Tags\":[\"Futebol\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/acceptance/{{request2Id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"acceptance",
+						"{{request2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido de Ligacao Indireta entre 1 e 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\": \"{{userId1}}\",\r\n    \"InterUser\": \"{{userId2}}\",\r\n    \"DestUser\": \"{{userId3}}\",\r\n    \"MessageOrigToDest\": \"Ola queria conhecer-te por irmos ao concerto juntos\",\r\n    \"MessageOrigToInter\": \"Ola queria conhecer ao user3 porque introduziste-me a ele durante o concerto do weeknd\",\r\n    \"ConnectionStrength\": 3,\r\n    \"Tags\": [\r\n        \"R&B\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/introductionRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"introductionRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter pedidos de introducao a aceitar por user 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"connectionToAcceptId\", response[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/pendingApproval/{{userId2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"pendingApproval",
+						"{{userId2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User 2 Aprovar o pedido de introducao",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"Id\":\"{{connectionToAcceptId}}\",\r\n    \"Approved\":true,\r\n    \"MessageInterToDest\":\"Bom rapaz\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/approval/{{connectionToAcceptId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"approval",
+						"{{connectionToAcceptId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter pedidos de ligacao a aceitar por user 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"IdLigacaoUser1_User3\", response.requests[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/acceptance/{{userId3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"acceptance",
+						"{{userId3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User 3 aceitar o pedido de intermedio de user 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let u1 = pm.globals.get(\"userId1\");\r",
+							"let u3 = pm.globals.get(\"userId3\");\r",
+							"\r",
+							"pm.test(\"Check user1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user1).to.eql(u1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check user3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user2).to.eql(u3);\r",
+							"});\r",
+							"\r",
+							"pm.globals.clear()"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Answer\":true,\r\n    \"ConnectionStrength\":5,\r\n    \"Tags\":[\"Futebol\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ConnectionRequest/acceptance/{{IdLigacaoUser1_User3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"acceptance",
+						"{{IdLigacaoUser1_User3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teardown",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

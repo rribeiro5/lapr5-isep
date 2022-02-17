@@ -1,0 +1,98 @@
+﻿.card-container {
+    border-radius: 5px;
+    box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+    color: #B3B8CD;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+
+.card-container .round {
+    border: 1px solid #03BFCB;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+button.primary {
+    background-color: #03BFCB;
+    border: 1px solid #03BFCB;
+    border-radius: 3px;
+    color: #231E39;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    padding: 10px 25px;
+}
+
+button.primary.ghost {
+    background-color: transparent;
+    color: #02899C;
+}
+
+.profile-preview-container{
+    padding: 1.5rem;
+    border-radius:5px ;
+    position: relative;
+    width: 100%;
+    text-align: initial;
+}
+
+.profile-preview-container .userInfoContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profilePreview-row-container{
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profilePreview-row-container .round{
+    height: 110px;
+    margin-bottom: 0.5rem ;
+}
+
+.profilePreview-actions{
+    display: flex;
+    grid-gap: 1.5rem;
+    gap: 1.2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+.profilePreview-actions span {
+    height: 20%;
+}
+
+.profilePreview-actions button {
+    height: 100%;
+}
+
+.profilePreview-actions .friend-span{
+    width: 100%;
+    text-align: center;
+}
+
+.view-profile-action {
+    display: block;
+    background-color: var(--main-background-color);
+    border-radius: 999px;
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+    padding: 0.5rem 1.4rem;
+    border: 1px solid var(--white);
+    width: 100%;
+}

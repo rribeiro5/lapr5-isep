@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "a710c264-7d9c-4295-b1d5-0fcee8d2cd6e",
+		"name": "Teste Integracao - UC10",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User 8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Matches birthDayDate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.birthDayDate).to.eql(\"2000/1/1\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Matches Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"8@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"userId8\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"8@gmail.com\",\r\n    \"name\":\"Teste8\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd8\",\r\n    \"description\":\"c8\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Matches birthDayDate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.birthDayDate).to.eql(\"2000/1/1\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Matches Email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"9@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"pm.globals.set(\"userId9\",response.id);\r",
+							"pm.globals.set(\"user9Name\",\"Teste9\");\r",
+							"pm.globals.set(\"user9Country\",\"Portugal\");\r",
+							"pm.globals.set(\"user9Email\",response.email);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"9@gmail.com\",\r\n    \"name\":\"Teste9\",\r\n    \"country\":\"Portugal\",\r\n    \"LinkLinkedin\":\"https://www.linkedin.com/in/Teste1\",\r\n    \"LinkFacebook\":\"https://www.facebook.com/TheBest1\",\r\n    \"password\":\"Password1?\",\r\n    \"birthdaydate\":\"2000/1/1\",\r\n    \"city\":\"fd7\",\r\n    \"description\":\"c9\",\r\n    \"telephoneNumber\":\"+35156789\",\r\n    \"interestTags\":[\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search by name user 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let u9 = pm.globals.get(\"userId9\");\r",
+							"let userName9 = pm.globals.get(\"user9Name\")\r",
+							"\r",
+							"pm.test(\"User 9 expected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].id).to.eql(u9);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User name 9 expected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].name).to.eql(userName9);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/SearchUsers/GetByName/{{user9Name}}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"SearchUsers",
+						"GetByName",
+						"{{user9Name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search by email user 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let u9 = pm.globals.get(\"userId9\");\r",
+							"let userEmail9 = pm.globals.get(\"user9Email\")\r",
+							"\r",
+							"pm.test(\"User 9 expected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(u9);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User email 9 expected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(userEmail9);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/SearchUsers/GetByEmail/{{user9Email}}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"SearchUsers",
+						"GetByEmail",
+						"{{user9Email}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search by Portugal user 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let u9 = pm.globals.get(\"userId9\");\r",
+							"\r",
+							"\r",
+							"pm.test(\"User 9 expected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].id).to.eql(u9);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User email 9 expected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].country).to.eql(\"Portugal\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/SearchUsers/GetByCountry/{{user9Country}}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"SearchUsers",
+						"GetByCountry",
+						"{{user9Country}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedido de ligacao direta por User 8 a user 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"let u8 = pm.globals.get(\"userId8\");\r",
+							"let u9 = pm.globals.get(\"userId9\");\r",
+							"\r",
+							"pm.test(\"Check Origin User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.origUser.value).to.eql(u8);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Destinitary User\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.destUser.value).to.eql(u9);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check direct message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.messageOrigToDest).to.eql(\"Teste\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrigUser\": \"{{userId8}}\",\r\n    \"DestUser\": \"{{userId9}}\",\r\n    \"MessageOrigToDest\": \"Teste\",\r\n    \"ConnStrengthReq\": 4,\r\n    \"ConnTagsReq\": [\r\n        \"Bemfica\",\r\n        \"Xadrez\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/ConnectionRequest/directConnection",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"ConnectionRequest",
+						"directConnection"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

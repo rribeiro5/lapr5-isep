@@ -1,0 +1,31 @@
+﻿.MainContainer{
+    background-color: var(--main-background-color);
+    width: 50%;
+    border-left: 1px solid var(--white);
+    border-right: 1px solid var(--white);
+    overflow-y: visible;
+    height: 100vh;
+}
+
+.TitleContainer{
+    padding: 1.9rem;
+    border-bottom: 1px solid var(--white);
+    text-align: left;
+    display: flex;
+    justify-items: center;
+}
+
+.Title{
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.UseCaseContainer{
+    padding: 0;
+    /*height: 100%;*/
+   
+    display: flex;
+    /*align-items: center;  talvez seja necessario remover */
+    justify-content: center;
+}
+

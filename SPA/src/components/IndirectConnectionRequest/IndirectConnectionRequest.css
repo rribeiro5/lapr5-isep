@@ -1,0 +1,156 @@
+.IndirectConnectionsContainer{
+    width:100%;
+}
+
+.IndirectConnectionForm,.selectContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap:nowrap ;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.selectContainer{
+    flex-direction: row;
+    justify-content:center;
+    margin: 1.5rem 0;
+}
+
+.selectContainer label{
+    font-size: 1.4rem;
+    margin-right: 0.8rem;
+    text-decoration: underline 0.15em rgba(255, 255, 255, 0);
+    transition: text-decoration-color 300ms;
+}
+
+.selectContainer select , .selectContainer option{
+    background-color: var(--main-background-color);
+    color: var(--white);
+    width: 30%;
+    font-size: 1rem;
+    border-radius: 3px;
+}
+
+.selectContainer option{
+    padding: 0.8rem;
+    text-decoration: underline 0.15em rgba(255, 255, 255, 1);
+    transition: text-decoration-color 300ms;
+}
+
+.selectContainer option:hover,.selectContainer option:active,.selectContainer option:focus{
+    text-decoration-color: var(--main-theme-color);
+}
+
+
+
+
+.selectContainer:hover label , .selectContainer:active label, .selectContainer:focus label{
+    text-decoration-color: var(--main-theme-color);
+}
+
+
+.selectContainer:hover select , .selectContainer:active select, .selectContainer:focus select{
+    border:1px solid var(--main-theme-color);
+}
+
+
+.IndirectConnectionForm .form__group {
+    position: relative;
+    padding: 0.9rem 0 0;
+    margin-top: 0.55rem;
+    width: 50%;
+}
+
+.IndirectConnectionForm .form__field {
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid var(--gray);
+    outline: 0;
+    font-size: 1.3rem;
+    color: var(--white);
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin: 1.5rem 0;
+}
+
+.IndirectConnectionForm .form__field::placeholder {
+    color: transparent;
+}
+
+.IndirectConnectionForm .form__field:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.IndirectConnectionForm .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+.IndirectConnectionForm .form__field:focus ~ .form__label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--main-theme-color);
+    font-weight:700;
+}
+
+.IndirectConnectionForm .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right,var(--main-theme-color),var(--white));
+    border-image-slice: 1;
+}
+
+.IndirectConnectionForm .form__field:required,.form__field:invalid{
+    box-shadow:none;
+}
+
+.IndirectConnectionForm  .react-tagsinput-input{
+    border: 1px solid var(--white);
+    margin: 1.2rem 0;
+}
+
+.IndirectConnectionForm .react-tagsinput{
+    width: 50%;
+    border: 1px solid var(--white);
+}
+
+.IndirectConnectionForm .react-tagsinput .react-tagsinput-tag{
+    border: 1px solid var(--main-theme-color);
+}
+
+
+.IndirectConnectionForm input[type=submit]{
+    border-radius: 999px;
+    padding: 0.5em 1.2em;
+    margin: 0.6rem 0;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: var(--main-theme-color) 0 3px 8px ;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 40%;
+    word-break: break-word;
+    border:0;
+    background-color:var(--main-theme-color);
+    color: #fff;
+}
+
+

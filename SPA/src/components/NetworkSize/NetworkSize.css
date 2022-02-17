@@ -1,0 +1,43 @@
+﻿.network-size-main-container{
+    width: 100%;
+}
+
+.network-size-submit-button{
+    border-radius: 999px;
+    padding: 0.5em 1.2em;
+    margin: 1.2rem 0;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: var(--bright-pink) 0 3px 8px ;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 24px;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 60%;
+    word-break: break-word;
+    border:0;
+    background-color:var(--bright-pink);
+    color: #fff;
+    transition: 1s opacity;
+}
+
+.network-size-input-container{
+    border-bottom: 1px solid var(--white);
+  
+}
+
+.network-size-results-container{
+    text-align: center;
+    padding: 0.8rem 0;
+}
+
+.network-size-results-container p{
+    font-size: 1.5rem ;
+}
+
+.network-size-result{
+    color: var(--bright-pink);
+}

@@ -1,0 +1,17 @@
+.tagcloud-container {
+    width: 100%;
+}
+
+.tagcloud-type {
+    width: 85%;
+    margin: 30px auto;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14pt;
+    color: #ccc;
+    background-color: #000;
+}
+
+.tag-cloud-tags > p {
+    transition: 1.5s;
+}

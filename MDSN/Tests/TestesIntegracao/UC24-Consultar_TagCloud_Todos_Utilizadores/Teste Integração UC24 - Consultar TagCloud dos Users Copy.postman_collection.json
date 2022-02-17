@@ -1,0 +1,634 @@
+{
+	"info": {
+		"_postman_id": "03323122-4f1d-4340-957e-594653789095",
+		"name": "Teste Integração UC24 - Consultar TagCloud dos Users Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clean Database",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TagCloud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are no users\", function () {",
+							"    pm.response.to.have.body(\"[]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tagcloud/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tagcloud",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct name\", function () {",
+							"    pm.expect(responseJson.name).to.eql(pm.collectionVariables.get(\"name\"));",
+							"});",
+							"",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"user_id1\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id1\"));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"avatar\", \"https://yt3.ggpht.com/ytc/AKedOLQ6Ief26j8b1lgSA1OpXSCzJBlnlEEsWtQAfdwB=s900-c-k-c0x00ffffff-no-rj\");",
+							"pm.collectionVariables.set(\"name\", \"Raquel Teixeira\");",
+							"pm.collectionVariables.set(\"email\", \"raquel@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/01/01\");",
+							"pm.collectionVariables.set(\"city\", \"Portugal\");",
+							"pm.collectionVariables.set(\"description\", \"desc1\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511234\");",
+							"pm.collectionVariables.set(\"t1\", \"tag1\");",
+							"pm.collectionVariables.set(\"t2\", \"tag2\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"avatar\":\"{{avatar}}\",\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{t1}}\",\"{{t2}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User1 just created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id1\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct name\", function () {",
+							"    pm.expect(responseJson.name).to.eql(pm.collectionVariables.get(\"name\"));",
+							"});",
+							"",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"user_id2\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id2\"));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"avatar\", \"https://yt3.ggpht.com/ytc/AKedOLQ6Ief26j8b1lgSA1OpXSCzJBlnlEEsWtQAfdwB=s900-c-k-c0x00ffffff-no-rj\");",
+							"pm.collectionVariables.set(\"name\", \"Marco Rebelo\");",
+							"pm.collectionVariables.set(\"email\", \"rebelo@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/01/01\");",
+							"pm.collectionVariables.set(\"city\", \"Portugal\");",
+							"pm.collectionVariables.set(\"description\", \"desc1\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511234\");",
+							"pm.collectionVariables.set(\"t1\", \"tag1\");",
+							"pm.collectionVariables.set(\"t2\", \"tag3\");",
+							"pm.collectionVariables.set(\"t3\",\"tag4\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"avatar\":\"{{avatar}}\",\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{t1}}\", \"{{t2}}\", \"{{t3}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User2 just created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id2\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct name\", function () {",
+							"    pm.expect(responseJson.name).to.eql(pm.collectionVariables.get(\"name\"));",
+							"});",
+							"",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							"",
+							"pm.collectionVariables.set(\"user_id3\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id3\"));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"avatar\", \"https://yt3.ggpht.com/ytc/AKedOLQ6Ief26j8b1lgSA1OpXSCzJBlnlEEsWtQAfdwB=s900-c-k-c0x00ffffff-no-rj\");",
+							"pm.collectionVariables.set(\"name\", \"Mariana Esteves\");",
+							"pm.collectionVariables.set(\"email\", \"mariana@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2000/01/01\");",
+							"pm.collectionVariables.set(\"city\", \"Portugal\");",
+							"pm.collectionVariables.set(\"description\", \"desc1\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+3511234\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\",\"tag5\", \"tag4\"]);",
+							"pm.collectionVariables.set(\"t1\", \"tag1\");",
+							"pm.collectionVariables.set(\"t2\", \"tag2\");",
+							"pm.collectionVariables.set(\"t3\",\"tag4\");",
+							"pm.collectionVariables.set(\"t4\",\"tag5\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"avatar\":\"{{avatar}}\",\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{t1}}\",\"{{t2}}\",\"{{t3}}\",\"{{t4}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User3 just created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id3\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TagCloud 3 users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"The most frequent tag is tag1\", function () {",
+							"    pm.expect(responseJson[0].value).to.eql(\"tag1\");",
+							"});",
+							"",
+							"pm.test(\"frequency equals 3\", function () {",
+							"    pm.expect(responseJson[0].count).to.eql(3);",
+							"});",
+							"",
+							"pm.test(\"The most frequent tag is tag1\", function () {",
+							"    pm.expect(responseJson[1].value).to.eql(\"tag2\");",
+							"});",
+							"",
+							"pm.test(\"frequency equals 3\", function () {",
+							"    pm.expect(responseJson[1].count).to.eql(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tagcloud/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tagcloud",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tear down",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "avatar",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "birthdayDate",
+			"value": ""
+		},
+		{
+			"key": "city",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		},
+		{
+			"key": "telephoneNumber",
+			"value": ""
+		},
+		{
+			"key": "interestTags",
+			"value": ""
+		},
+		{
+			"key": "user_id1",
+			"value": ""
+		},
+		{
+			"key": "user_id2",
+			"value": ""
+		},
+		{
+			"key": "user_id3",
+			"value": ""
+		},
+		{
+			"key": "t1",
+			"value": ""
+		},
+		{
+			"key": "t2",
+			"value": ""
+		},
+		{
+			"key": "t3",
+			"value": ""
+		},
+		{
+			"key": "t4",
+			"value": ""
+		}
+	]
+}

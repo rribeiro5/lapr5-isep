@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "7ffbe3dd-1972-41b5-96e6-b3e0ba91e3b6",
+		"name": "UC05-Edit Profile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete all before all",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/tests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are no user profiles\", function () {",
+							"    pm.response.to.have.body(\"[]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"/*",
+							"var responseList=responseJson.interestTags;",
+							"var expectedList=pm.environment.get(\"interestTags\");",
+							"",
+							"pm.test(\"Body returns the correct tags\", function () {",
+							"    pm.expect(responseList).to.have.deep.members(expectedList)",
+							"});",
+							"*/",
+							"",
+							"pm.collectionVariables.set(\"user_id\", responseJson.id);",
+							"",
+							"console.log(pm.collectionVariables.get(\"user_id\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"name\", \"userUC05\");",
+							"pm.collectionVariables.set(\"email\", \"uc05@gmail.com\");",
+							"pm.collectionVariables.set(\"password\", \"Password1?\");",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2001/01/02\");",
+							"pm.collectionVariables.set(\"city\", \"Portugal\");",
+							"pm.collectionVariables.set(\"description\", \"user uc05\");",
+							"pm.collectionVariables.set(\"telephoneNumber\", \"+351123456\");",
+							"pm.collectionVariables.set(\"interestTags\", [\"tag1\",\"tag2\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{name}}\",\n    \"email\":\"{{email}}\",\n    \"password\":\"{{password}}\",\n    \"birthdaydate\":\"{{birthdayDate}}\",\n    \"city\":\"{{city}}\",\n    \"description\":\"{{description}}\",\n    \"telephoneNumber\":\"{{telephoneNumber}}\",\n    \"interestTags\":[\"{{interestTags}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User just created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthDayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct emotional state\", function () {",
+							"    pm.expect(responseJson.emotionalState).to.eql(null)",
+							"});",
+							"",
+							"pm.test(\"Returned Category has correct description\", function () {",
+							"    pm.expect(responseJson.description).to.eql(pm.environment.get(\"category_description\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{user_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"User creation returns status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned User has correct user_id\", function () {",
+							"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"user_id\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct birthday date\", function () {",
+							"    pm.expect(responseJson.birthdayDate).to.eql(pm.collectionVariables.get(\"birthdayDate\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct email\", function () {",
+							"    pm.expect(responseJson.email).to.eql(pm.collectionVariables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Body returns the correct telephone number\", function () {",
+							"    pm.expect(responseJson.phoneNumber).to.eql(pm.collectionVariables.get(\"telephoneNumber\"));",
+							"});",
+							"",
+							"",
+							"pm.test(\"Body returns the correct description\", function () {",
+							"    pm.expect(responseJson.description).to.eql(pm.collectionVariables.get(\"description\"))",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"description\",\"updated descr\");\r",
+							"pm.collectionVariables.set(\"birthdayDate\", \"2001/01/03\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"{{user_id}}\",\r\n    \"name\":\"userUC05\",\r\n    \"description\":\"{{description}}\",\r\n    \"birthdaydate\":\"{{birthdayDate}}\",\r\n    \"telephoneNumber\": \"+35112345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/profile/{{user_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"profile",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tear down",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/tests/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tests",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "birthdayDate",
+			"value": ""
+		},
+		{
+			"key": "city",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		},
+		{
+			"key": "telephoneNumber",
+			"value": ""
+		},
+		{
+			"key": "interestTags",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		}
+	]
+}
